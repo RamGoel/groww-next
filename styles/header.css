@@ -1,0 +1,23 @@
+@import url('variables.css');
+.header_body{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.header_left{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header_right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_profile_image{
+    border-radius: var(--full-radius);
+    margin: 0px 10px;
+}
