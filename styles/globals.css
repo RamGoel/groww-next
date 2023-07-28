@@ -47,3 +47,12 @@ a {
   transition: .5s;
 }
 
+.dark{
+  background-color: #000;
+  color: #fff;
+}
+
+.light{
+  background-color: #fff;
+  color: #000;
+}

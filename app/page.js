@@ -3,17 +3,18 @@ import Image from 'next/image'
 import { Google } from 'iconsax-react'
 import '@styles/home.css'
 import { useAppSelector } from '@redux/hooks'
+import { styles } from '@utils/styles'
+import Link from 'next/link'
 export default function Home() {
   const uiMode = useAppSelector(state => state.global.uiMode)
   return (
-    <div className='home_page'>
+    <div className={`home_page ${uiMode}`}>
       <div className='home_left'>
-        <h1 className=''>SocioGram</h1>
-        <p className=''>the ultimate <span>social media</span></p>
-        <button className=''>
-          <Google />
-          Login via Google
-        </button>
+        <h1>SocioGram</h1>
+        <p>the ultimate <span>social media</span></p>
+        <Link className='home_btn' href="/feed">
+          Start Scrolling!
+        </Link>
       </div>
       <div className='home_right'>
         <Image

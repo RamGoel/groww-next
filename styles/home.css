@@ -28,8 +28,9 @@
     color: var(--primary-color);
 }
 
-.home_left>button {
-    padding: 7px 10px;
+.home_btn{
+    padding: 10px 20px;
+    width: 150px;
     border-radius: 10px;
     background-color: var(--dark-grey);
     display: flex;
@@ -37,10 +38,8 @@
     justify-content: center;
     border: none;
     margin: 10px 0px;
-}
-
-.home_left>button>svg {
-    margin-right: 10px;
+    color: white;
+    font-size: 13px;
 }
 
 
