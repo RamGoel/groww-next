@@ -7,6 +7,7 @@ import '@styles/header.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeUiMode } from '@redux/slices/globalSlice'
 import { styles } from '@utils/styles';
+import Link from 'next/link';
 const Header = () => {
     const isLoggedin = true
     const dispatch = useDispatch()
@@ -15,14 +16,14 @@ const Header = () => {
         <div className='header_body' style={{
             backgroundColor:styles[uiMode].background
         }}>
-            <div className='header_left'>
+            <Link href="/" className='header_left'>
                 <Image
                     src={`/logo.png`}
                     width={40}
                     height={40}
                     alt='App Logo'
                 />
-            </div>
+            </Link>
             {
                 isLoggedin ? (
                     <div className='header_right'>

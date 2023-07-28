@@ -10,7 +10,7 @@ const PostCard = ({
         <div key={data.id}>
             <div className='post_body'>
                 <div className='post_header'>
-                    <div className='header_left'>
+                    <div className='post_header_left'>
                         <Image
                             src={`${data.user.image}`}
                             width={50}
@@ -18,7 +18,7 @@ const PostCard = ({
                             alt="post-image"
                             className='post_icon'
                         />
-                        <div className='header_text'>
+                        <div className='post_header_text'>
                             <h4>{data.user.username}</h4>
                             <p>{data.location}</p>
                         </div>

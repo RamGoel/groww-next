@@ -15,7 +15,8 @@
 }
 
 .light>.feed_box{
-    background-color: #eee;
+    /* background-color: #eee; */
+    background-color: transparent;
 }
 .feed_left{
     width: 23%;
@@ -30,6 +31,16 @@
 
 .feed_mid{
     width: 50%;
+    overflow-y: scroll;
+    height: 85vh;
+}
+
+
+.feed_mid::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #060606;
+    display: none;
 }
 
 .feed_left_list{
@@ -89,4 +100,22 @@
 .feed_right_box p{
     font-size: 13px;
     margin-top: 5px;
+}
+
+
+
+@media screen and (max-width:768px) {
+    .feed_left, .feed_right{
+        display: none;
+    }
+
+    .feed_mid{
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .feed_page{
+        padding: 0px;
+    }
 }
