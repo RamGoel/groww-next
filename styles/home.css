@@ -7,7 +7,10 @@
     height: 90vh;
 }
 
-.home_page>div {
+.home_left {
+    width: 40%;
+}
+.home_right {
     width: 40%;
 }
 
@@ -49,9 +52,14 @@
         padding-top: 50px;
     }
 
-    .home_page>div {
+
+    .home_left {
         width: 90%;
         margin: auto;
+    }
+
+    .home_right{
+        width: 100%;
     }
 
     .home_left>h1{
@@ -61,8 +69,6 @@
     .home_image {
         width: 400px !important;
         margin: auto;
-        object-fit: con;
-        background-color: red;
-        border: 1px solid red;
+        object-fit: contain;
     }
 }
