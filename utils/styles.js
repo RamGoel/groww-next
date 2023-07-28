@@ -9,5 +9,4 @@ export const styles={
         text:'#000',
         primary:''
     },
-
 }

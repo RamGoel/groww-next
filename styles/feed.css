@@ -1,0 +1,92 @@
+.feed_page{
+    width: 100vw;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 90vh;
+}
+
+.feed_box{
+    background-color: #090909;
+    min-width: 200px;
+    min-height: 85vh;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.light>.feed_box{
+    background-color: #eee;
+}
+.feed_left{
+    width: 23%;
+    border-radius: 40px;
+    border-top-right-radius: 0px;
+}
+.feed_right{
+    width: 23%;
+    border-radius: 40px;
+    border-top-left-radius: 0px;
+}
+
+.feed_mid{
+    width: 50%;
+}
+
+.feed_left_list{
+    margin-top: 30px;
+}
+
+.feed_left_list>div{
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.feed_left_list>div>p{
+    margin-top: 2px;
+    margin-left: 10px;
+    font-size: 13px;
+}
+
+.feed_left_list>div>svg{
+    width: 20px;
+    height: 20px;
+}
+
+.feed_left_list>div:hover{
+    background-color: rgb(14, 14, 14);
+}
+
+.light .feed_left_list>div:hover{
+    background-color: rgb(242,242,242);
+}
+
+
+
+/* Feed Right CSS */
+
+.feed_right_box{
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.feed_right_box>img{
+    border-radius: var(--full-radius);
+}
+
+.feed_right_box h3{
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.feed_right_box p{
+    font-size: 13px;
+    margin-top: 5px;
+}
