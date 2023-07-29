@@ -2,6 +2,7 @@ import Image from 'next/image'
 import '@styles/postCard.css'
 import { postFooterData } from '@utils/data'
 import { useSelector } from 'react-redux'
+import Link from 'next/link'
 const PostCard = ({
     data,
 }) => {
@@ -11,13 +12,15 @@ const PostCard = ({
             <div className='post_body'>
                 <div className='post_header'>
                     <div className='post_header_left'>
-                        <Image
-                            src={`${data.user.image}`}
-                            width={50}
-                            height={50}
-                            alt="post-image"
-                            className='post_icon'
-                        />
+                        <Link href={`/user/${data.user.username}`}>
+                            <Image
+                                src={`${data.user.image}`}
+                                width={50}
+                                height={50}
+                                alt="post-image"
+                                className='post_icon'
+                            />
+                        </Link>
                         <div className='post_header_text'>
                             <h4>{data.user.username}</h4>
                             <p>{data.location}</p>

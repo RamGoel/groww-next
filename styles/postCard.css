@@ -25,6 +25,11 @@
     border-radius: var(--full-radius);
 }
 
+.post_icon:hover{
+    opacity: 0.7;
+    transition: .5s;
+}
+
 .post_header_text h4{
     font-size: 15px;
 }
