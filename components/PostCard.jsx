@@ -12,9 +12,9 @@ const PostCard = ({
             <div className='post_body'>
                 <div className='post_header'>
                     <div className='post_header_left'>
-                        <Link href={`/user/${data.user.username}`}>
+                        <Link href={`/user/${data.user.id}`}>
                             <Image
-                                src={`${data.user.image}`}
+                                src={`${data.user.profile_image.small}`}
                                 width={50}
                                 height={50}
                                 alt="post-image"
@@ -22,14 +22,14 @@ const PostCard = ({
                             />
                         </Link>
                         <div className='post_header_text'>
-                            <h4>{data.user.username}</h4>
-                            <p>{data.location}</p>
+                            <h4>{data.user.instagram_username || "Shivam Verma"}</h4>
+                            <p>{data.user.location || "Rishikesh, Uttrakhand"}</p>
                         </div>
                     </div>
                 </div>
 
                 <Image
-                    src={data.imageUrl}
+                    src={data.urls.small}
                     width={500}
                     height={230}
                     alt='post_image'
@@ -42,8 +42,8 @@ const PostCard = ({
                         {
                             postFooterData.map(box => {
                                 return <div className='footer_box'>
-                                    {box.icon(uiMode)}
-                                    <p>{data[box.key]}</p>
+                                    {box.icon(uiMode, data.liked_by_user)}
+                                    <p>{data.likes}</p>
                                 </div>
                             })
                         }

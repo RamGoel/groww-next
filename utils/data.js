@@ -27,7 +27,7 @@ export const sidebarData=[
 
 export const postFooterData=[
     {
-        icon:(theme)=><Heart color={styles[theme].text} size={18} />,
+        icon:(theme, isSelected)=><Heart color={isSelected?'red':styles[theme].text} size={18} variant={isSelected?'Bold':'Linear'} />,
         key:"likes"
     },
     {
@@ -41,72 +41,5 @@ export const postFooterData=[
     {
         icon:(theme)=><Save2 color={styles[theme].text} size={18} />,
         key:"saves"
-    },
-]
-
-export const postData=[
-    {
-        id:'njd92ewi022o20',
-        user:{
-            name:"Shreya Verma",
-            image:"/profile.jpg",
-            username:"@shreuva",
-        },
-        date:"28-07-2023",
-        time:"13:02",
-        likes:32,
-        comments:3,
-        shares:77,
-        saves:12,
-        imageUrl:"https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*",
-        location:"Gurugram, Haryana"
-    },
-    {
-        id:'njd92ewi022o20',
-        user:{
-            name:"Shreya Verma",
-            image:"/profile.jpg",
-            username:"@shreuva",
-        },
-        date:"28-07-2023",
-        time:"13:02",
-        likes:32,
-        comments:3,
-        shares:77,
-        saves:12,
-        imageUrl:"https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*",
-        location:"Gurugram, Haryana"
-    },
-    {
-        id:'njd92ewi022o20',
-        user:{
-            name:"Shreya Verma",
-            image:"/profile.jpg",
-            username:"@shreuva",
-        },
-        date:"28-07-2023",
-        time:"13:02",
-        likes:32,
-        comments:3,
-        shares:77,
-        saves:12,
-        imageUrl:"https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*",
-        location:"Gurugram, Haryana"
-    },
-    {
-        id:'njd92ewi022o20',
-        user:{
-            name:"Shreya Verma",
-            image:"/profile.jpg",
-            username:"@shreuva",
-        },
-        date:"28-07-2023",
-        time:"13:02",
-        likes:32,
-        comments:3,
-        shares:77,
-        saves:12,
-        imageUrl:"https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*",
-        location:"Gurugram, Haryana"
     },
 ]

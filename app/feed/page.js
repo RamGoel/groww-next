@@ -1,13 +1,18 @@
 "use client"
 import '@styles/feed.css'
-import { useAppSelector } from '@redux/hooks'
-import { Heart } from 'iconsax-react'
-import { styles } from '@utils/styles'
 import { postData, sidebarData } from '@utils/data'
 import Image from 'next/image'
 import PostCard from '@components/PostCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getImagesApi } from '@services/api'
 export default function Home() {
-  const uiMode = useAppSelector(state => state.global.uiMode)
+  const dispatch = useDispatch()
+  const uiMode = useSelector(state => state.global.uiMode)
+  const feedData = useSelector(state => state.global.feedData)
+  useEffect(() => {
+    dispatch(getImagesApi())
+  }, [])
   return (
     <div className={`feed_page ${uiMode}`}>
       <div className='feed_box feed_left'>
@@ -23,9 +28,9 @@ export default function Home() {
         </div>
       </div>
       <div className='feed_box feed_mid'>
-          {
-            postData.map(post=><PostCard data={post} />)
-          }
+        {
+          feedData?.map(post => <PostCard data={post} />)
+        }
       </div>
       <div className='feed_box feed_right'>
         <div className='feed_right_box'>

@@ -2,11 +2,11 @@
 import Image from 'next/image'
 import { Google } from 'iconsax-react'
 import '@styles/home.css'
-import { useAppSelector } from '@redux/hooks'
+import { useSelector } from 'react-redux'
 import { styles } from '@utils/styles'
 import Link from 'next/link'
 export default function Home() {
-  const uiMode = useAppSelector(state => state.global.uiMode)
+  const uiMode = useSelector(state => state.global.uiMode)
   return (
     <div className={`home_page ${uiMode}`}>
       <div className='home_left'>
