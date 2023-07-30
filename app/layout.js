@@ -5,10 +5,6 @@ import { Poppins } from 'next/font/google'
 import { Providers } from '@redux/provider'
 const poppy = Poppins({ weight: "500", subsets: ['latin'] })
 
-export const metadata = {
-  title: 'SocioGram',
-  description: 'The one stop social media for developers',
-}
 
 export default function RootLayout({ children }) {
 
@@ -18,7 +14,7 @@ export default function RootLayout({ children }) {
         rel="icon"
         href="/logo.png"
       />
-      <title>{metadata.title}</title>
+      <title>{`SocialGram`}</title>
       <body className={poppy.className}>
         <Providers>
           <Header />
