@@ -1,38 +1,37 @@
 "use client"
 import '@styles/feed.css'
-import { postData, sidebarData } from '@utils/data'
+import { sidebarData } from '@utils/data'
 import Image from 'next/image'
 import PostCard from '@components/PostCard'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getImagesApi } from '@services/api'
+import { saveFeedData } from '@redux/slices/globalSlice'
+import Loader from '@components/Loader'
 export default function Home() {
   const dispatch = useDispatch()
-  const [isLoading, setLoading] = useState(true)
   const uiMode = useSelector(state => state.global.uiMode)
   const feedData = useSelector(state => state.global.feedData)
+  const scrollerRef = useRef()
 
-
-  const fetchData=()=>{
-    setLoading(true)
-    dispatch(getImagesApi(), () => setLoading(false))
+  const fetchData = () => {
+    dispatch(getImagesApi())
   }
   const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) {
-      return;
+    if (scrollerRef.current.scrollTop - scrollerRef.current.scrollHeight - scrollerRef.current.clientHeight < 1) {
+      dispatch(saveFeedData(feedData))
     }
-    fetchData();
   };
-  
+
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    scrollerRef.current.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isLoading]);
+  }, []);
 
 
-  // useEffect(() => {
-    
-  // }, [])
+  useEffect(() => {
+    // fetchData()
+  }, [])
   return (
     <div className={`feed_page ${uiMode}`}>
       <div className='feed_box feed_left'>
@@ -47,7 +46,8 @@ export default function Home() {
           }
         </div>
       </div>
-      <div className='feed_box feed_mid'>
+      <div ref={scrollerRef} className='feed_box feed_mid'>
+
 
         {
 
@@ -55,15 +55,7 @@ export default function Home() {
             ? feedData.map(post => {
               return <PostCard data={post} />
             })
-            : <div className='feed_load_image'>
-              <Image
-                src={`https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif`}
-                width={40}
-                height={40}
-                alt='loading-image'
-
-              />
-            </div>
+            : <Loader />
 
         }
       </div>

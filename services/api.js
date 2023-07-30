@@ -1,16 +1,18 @@
 import axios from "axios"
 import { Api } from "./config"
-import { saveFeedData } from "@redux/slices/globalSlice"
+import { saveFeedData, saveUserData } from "@redux/slices/globalSlice"
 export const getImagesApi = () => {
-    return (dispatch, disableLoader) => {
-        console.log(process.env.UNSPLASH_KEY)
+    return (dispatch) => {
         Api.get('/photos/random?count=10').then(res => {
-            console.log(res)
             dispatch(saveFeedData(res.data))
         }).catch(err => {
             console.log(err)
-        }).finally(()=>{
-            disableLoader()
         })
+    }
+}
+export const getUserDetailsApi = (id) => {
+    return (dispatch) => {
+        console.log("----->", id)
+        
     }
 }

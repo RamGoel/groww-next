@@ -12,7 +12,7 @@ const PostCard = ({
             <div className='post_body'>
                 <div className='post_header'>
                     <div className='post_header_left'>
-                        <Link href={`/user/${data.user.id}`}>
+                        <Link href={`/user/${data.user.username}`}>
                             <Image
                                 src={`${data.user.profile_image.small}`}
                                 width={50}
@@ -22,7 +22,7 @@ const PostCard = ({
                             />
                         </Link>
                         <div className='post_header_text'>
-                            <h4>{data.user.instagram_username || "Shivam Verma"}</h4>
+                            <h4>{data.user.username || "Shivam Verma"}</h4>
                             <p>{data.user.location || "Rishikesh, Uttrakhand"}</p>
                         </div>
                     </div>
@@ -34,7 +34,6 @@ const PostCard = ({
                     height={230}
                     alt='post_image'
                     className='post_media'
-                    layout='respnsive'
                 />
 
                 <div className='post_footer'>
