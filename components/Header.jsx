@@ -1,21 +1,19 @@
 "use client";
 
-import { Moon, Sun1 } from 'iconsax-react'
+import { Login, Moon, Sun1 } from 'iconsax-react'
 import Image from 'next/image'
 import React from 'react'
 import '@styles/header.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeUiMode } from '@redux/slices/globalSlice'
+import { changeLoginStatus, changeUiMode } from '@redux/slices/globalSlice'
 import { styles } from '@utils/styles';
 import Link from 'next/link';
 const Header = () => {
-    const isLoggedin = true
     const dispatch = useDispatch()
     const uiMode = useSelector(state => state.global.uiMode)
+    const isLoggedin = useSelector(state => state.global.isLoggedin)
     return (
-        <div className='header_body' style={{
-            backgroundColor:styles[uiMode].background
-        }}>
+        <div className={`header_body ${uiMode}`} >
             <Link href="/" className='header_left'>
                 <Image
                     src={`/logo.png`}
@@ -54,11 +52,11 @@ const Header = () => {
                 ) : (
                     <>
                         <div className='header_right'>
-                            <Image
-                                src={'/profile.jpg'}
-                                width={40}
-                                height={40}
-                                alt='App Logo'
+                            <Login
+                                size={40}
+                                onClick={()=>{
+                                    dispatch(changeLoginStatus())
+                                }}
                                 className='header_profile_image'
                             />
                         </div>

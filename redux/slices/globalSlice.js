@@ -947,7 +947,9 @@ const initialState = {
             "downloads": 13100
         }
     ],
-    userData:null
+    userData: null,
+    userImages: null,
+    isLoggedin:false
 
 }
 const globalSlice = createSlice({
@@ -963,7 +965,12 @@ const globalSlice = createSlice({
         saveUserData: (state, action) => {
             state.userData = action.payload
         },
-
+        saveUserImages: (state, action) => {
+            state.userImages = action.payload
+        },
+        changeLoginStatus:(state)=>{
+            state.isLoggedin=!state.isLoggedin
+        }
     },
     extraReducers: {
         [HYDRATE]: (state, action) => {
@@ -975,6 +982,12 @@ const globalSlice = createSlice({
     },
 })
 
-export const { changeUiMode, saveFeedData, saveUserData } = globalSlice.actions
+export const {
+    changeUiMode,
+    saveFeedData,
+    saveUserData,
+    saveUserImages,
+    changeLoginStatus
+} = globalSlice.actions
 
 export default globalSlice.reducer

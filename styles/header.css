@@ -1,23 +1,44 @@
 @import url('variables.css');
-.header_body{
+
+.header_body {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
 }
 
-.header_left{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.header_right{
+.header_left {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.header_profile_image{
+.header_right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_profile_image {
     border-radius: var(--full-radius);
     margin: 0px 10px;
+}
+
+
+
+.click_icon {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: var(--full-radius);
+}
+
+.click_icon:hover {
+    background-color: rgb(34, 34, 34);
+    transition: .5s;
+    color: white;
+}
+
+.light .click_icon:hover {
+    background-color: rgb(242, 242, 242);
 }

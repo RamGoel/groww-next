@@ -35,26 +35,12 @@ a {
   }
 }
 
-
-.click_icon{
-  width: 40px;
-  height: 40px;
-  padding: 10px;
-  
-  border-radius: var(--full-radius);
-}
-
-.click_icon:hover{
-  background-color: rgb(34, 34, 34);
-  transition: .5s;
-}
-
-.dark{
+.dark {
   background-color: #000;
   color: #fff;
 }
 
-.light{
+.light {
   background-color: #fff;
   color: #000;
 }

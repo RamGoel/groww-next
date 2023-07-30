@@ -38,8 +38,6 @@
 
 .feed_mid::-webkit-scrollbar
 {
-	width: 10px;
-	background-color: #060606;
     display: none;
 }
 
