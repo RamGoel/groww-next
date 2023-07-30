@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
 import { saveFeedData } from '@redux/slices/globalSlice'
 import Loader from '@components/Loader'
-import axios from 'axios'
 import { Api } from '@services/config'
 import { Toaster, toast } from 'react-hot-toast'
 import NotFound from '@components/NotFound'
@@ -31,18 +30,17 @@ export default function Home() {
   const handleScroll = () => {
     if (scrollerRef.current.scrollTop - scrollerRef.current.scrollHeight - scrollerRef.current.clientHeight < 1) {
       dispatch(saveFeedData(feedData))
+      alert("hello")
     }
   };
 
   useEffect(() => {
+    fetchData()
     scrollerRef.current.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
 
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   return (
     <div className={`feed_page ${uiMode}`}>
@@ -77,6 +75,7 @@ export default function Home() {
       <div className='feed_box feed_right'>
         <div className='feed_right_box'>
           <Image
+            loading='lazy'
             src={`/profile.png`}
             height={100}
             alt='Profile Icon'

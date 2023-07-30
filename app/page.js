@@ -18,6 +18,7 @@ export default function Home() {
       </div>
       <div className='home_right'>
         <Image
+          loading='lazy'
           width={450}
           height={400}
           src={`/home-${uiMode}.png`}

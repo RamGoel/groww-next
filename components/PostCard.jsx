@@ -14,6 +14,7 @@ const PostCard = ({
                     <div className='post_header_left'>
                         <Link href={`/user/${data.user.username}`}>
                             <Image
+                                loading='lazy'
                                 src={`${data.user.profile_image.small}`}
                                 width={50}
                                 height={50}
@@ -29,6 +30,7 @@ const PostCard = ({
                 </div>
 
                 <Image
+                    loading='lazy'
                     src={data.urls.small}
                     width={500}
                     height={230}

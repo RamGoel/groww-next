@@ -49,6 +49,7 @@ const page = ({ params }) => {
               <div className='profile_header'>
                 <div className='profile_header_left'>
                   <Image
+                    loading='lazy'
                     src={userData.profile_image.large}
                     width={100}
                     height={100}
