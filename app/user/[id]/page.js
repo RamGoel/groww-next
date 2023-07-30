@@ -10,6 +10,7 @@ import Image from 'next/image'
 import '@styles/profile.css'
 import { Grid5, HambergerMenu, Message, ProfileAdd } from 'iconsax-react'
 import PostCard from '@components/PostCard'
+import { Toaster, toast } from 'react-hot-toast'
 const page = ({ params }) => {
   const [isLoading, setLoading] = useState(false)
   const userData = useSelector(state => state.global.userData)
@@ -30,6 +31,7 @@ const page = ({ params }) => {
         })
       }).catch(err => {
         setLoading(false)
+        toast.error(err.response.data.errors[0])
         console.log(err)
       })
     
@@ -38,10 +40,11 @@ const page = ({ params }) => {
 
   return (
     <div className={`profile_page ${uiMode}`}>
+      <Toaster position='bottom-center' />
       {
         !isLoading
           ? (!userData || userData.length === 0)
-            ? <NotFound />
+            ? <NotFound type="User" />
             : <div className='profile_body'>
               <div className='profile_header'>
                 <div className='profile_header_left'>
@@ -54,7 +57,7 @@ const page = ({ params }) => {
                   />
                   <div className='profile_header_text'>
                     <h3>{userData.name} {userData.instagram_username ? `@${userData.instagram_username}`:''}</h3>
-                    <p>{userData.bio.substring(0,235)}</p>
+                    <p>{userData?.bio?.substring(0,235)}</p>
                     <div className='profile_data'>
                       <div className='profile_data_item'>
                         <h4>{`Followers`}</h4>

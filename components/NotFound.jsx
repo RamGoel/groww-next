@@ -1,11 +1,11 @@
 import React from 'react'
 import '@styles/not_found.css'
-const NotFound = () => {
+const NotFound = ({type}) => {
     return (
         <div className='not_found_body'>
             <>
             <h1>404</h1>
-            <p>{`Profile Not Found`}</p>
+            <p>{`${type} Not Found`}</p>
             </>
         </div>
     )

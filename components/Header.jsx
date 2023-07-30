@@ -42,7 +42,7 @@ const Header = () => {
                                         dispatch(changeUiMode())
                                     }} />}
                         <Image
-                            src={`/profile.jpg`}
+                            src={`/profile.png`}
                             width={40}
                             height={40}
                             alt='App Logo'

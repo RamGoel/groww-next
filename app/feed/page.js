@@ -5,17 +5,28 @@ import Image from 'next/image'
 import PostCard from '@components/PostCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useRef, useState } from 'react'
-import { getImagesApi } from '@services/api'
 import { saveFeedData } from '@redux/slices/globalSlice'
 import Loader from '@components/Loader'
+import axios from 'axios'
+import { Api } from '@services/config'
+import { Toaster, toast } from 'react-hot-toast'
+import NotFound from '@components/NotFound'
 export default function Home() {
   const dispatch = useDispatch()
+  const [isLoading, setLoading] = useState(true)
   const uiMode = useSelector(state => state.global.uiMode)
   const feedData = useSelector(state => state.global.feedData)
   const scrollerRef = useRef()
 
   const fetchData = () => {
-    dispatch(getImagesApi())
+    setLoading(true)
+    Api.get('/photos/random?count=10').then(res => {
+      dispatch(saveFeedData(res.data))
+      setLoading(false)
+    }).catch(err => {
+      setLoading(false)
+      toast.error(err.message)
+    })
   }
   const handleScroll = () => {
     if (scrollerRef.current.scrollTop - scrollerRef.current.scrollHeight - scrollerRef.current.clientHeight < 1) {
@@ -30,10 +41,12 @@ export default function Home() {
 
 
   useEffect(() => {
-    // fetchData()
+    fetchData()
   }, [])
+
   return (
     <div className={`feed_page ${uiMode}`}>
+      <Toaster position='bottom-center' />
       <div className='feed_box feed_left'>
         <div className='feed_left_list'>
           {
@@ -51,10 +64,12 @@ export default function Home() {
 
         {
 
-          feedData && feedData.length
-            ? feedData.map(post => {
-              return <PostCard data={post} />
-            })
+          !isLoading
+            ? feedData && feedData.length
+              ? feedData.map(post => {
+                return <PostCard data={post} />
+              })
+              : <NotFound type="Posts" />
             : <Loader />
 
         }
@@ -62,15 +77,15 @@ export default function Home() {
       <div className='feed_box feed_right'>
         <div className='feed_right_box'>
           <Image
-            src={`/profile.jpg`}
+            src={`/profile.png`}
             height={100}
             alt='Profile Icon'
             width={100}
             className='feed_right_image'
           />
 
-          <h3>Shreya Verma</h3>
-          <p>@shreuva</p>
+          <h3>Ram Goel</h3>
+          <p>@ramgoel_</p>
         </div>
       </div>
     </div>

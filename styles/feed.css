@@ -88,6 +88,7 @@
 
 .feed_right_box>img{
     border-radius: var(--full-radius);
+    object-fit: cover;
 }
 
 .feed_right_box h3{

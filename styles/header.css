@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    height: 10vh;
 }
 
 .header_left {
@@ -22,6 +23,7 @@
 .header_profile_image {
     border-radius: var(--full-radius);
     margin: 0px 10px;
+    object-fit: cover;
 }
 
 
