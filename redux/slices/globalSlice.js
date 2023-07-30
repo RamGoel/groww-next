@@ -1,8 +1,8 @@
 const { createSlice } = require("@reduxjs/toolkit");
 import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
-    uiMode: 'dark',
-    feedData:null
+    uiMode: 'light',
+    feedData: []
 
 }
 const globalSlice = createSlice({
@@ -13,7 +13,7 @@ const globalSlice = createSlice({
             state.uiMode = state.uiMode == 'dark' ? 'light' : 'dark'
         },
         saveFeedData: (state, action) => {
-            state.feedData = action.payload
+            state.feedData = [...state.feedData, ...action.payload]
         },
 
     },
@@ -27,6 +27,6 @@ const globalSlice = createSlice({
     },
 })
 
-export const { changeUiMode,saveFeedData } = globalSlice.actions
+export const { changeUiMode, saveFeedData } = globalSlice.actions
 
 export default globalSlice.reducer

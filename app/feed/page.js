@@ -4,15 +4,35 @@ import { postData, sidebarData } from '@utils/data'
 import Image from 'next/image'
 import PostCard from '@components/PostCard'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getImagesApi } from '@services/api'
 export default function Home() {
   const dispatch = useDispatch()
+  const [isLoading, setLoading] = useState(true)
   const uiMode = useSelector(state => state.global.uiMode)
   const feedData = useSelector(state => state.global.feedData)
+
+
+  const fetchData=()=>{
+    setLoading(true)
+    dispatch(getImagesApi(), () => setLoading(false))
+  }
+  const handleScroll = () => {
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) {
+      return;
+    }
+    fetchData();
+  };
+  
   useEffect(() => {
-    dispatch(getImagesApi())
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoading]);
+
+
+  // useEffect(() => {
+    
+  // }, [])
   return (
     <div className={`feed_page ${uiMode}`}>
       <div className='feed_box feed_left'>
@@ -28,8 +48,23 @@ export default function Home() {
         </div>
       </div>
       <div className='feed_box feed_mid'>
+
         {
-          feedData?.map(post => <PostCard data={post} />)
+
+          feedData && feedData.length
+            ? feedData.map(post => {
+              return <PostCard data={post} />
+            })
+            : <div className='feed_load_image'>
+              <Image
+                src={`https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif`}
+                width={40}
+                height={40}
+                alt='loading-image'
+
+              />
+            </div>
+
         }
       </div>
       <div className='feed_box feed_right'>
