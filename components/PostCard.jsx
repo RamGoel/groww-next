@@ -73,10 +73,10 @@ const PostCard = ({
                     <div className='footer_container'>
                         {
                             postFooterData.map(box => {
-                                return <div className='footer_box'>
+                                return (data[box.key]>=0) ?<div className='footer_box'>
                                     {box.icon(uiMode, data.liked_by_user)}
                                     <p>{data[box.key]}</p>
-                                </div>
+                                </div>:null
                             })
                         }
                     </div>
