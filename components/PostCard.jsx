@@ -43,8 +43,7 @@ const PostCard = ({
                                 alt="post-image"
                                 className='post_icon'
                                 style={{
-                                    outline: `2px solid ${data.color || 'blue'}`,
-                                    outlineOffset: 2
+                                    outlineColor:data.color ||'blue'
                                 }}
                             />
                         </Link>

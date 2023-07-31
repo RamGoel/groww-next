@@ -23,6 +23,8 @@
 
 .post_icon{
     border-radius: var(--full-radius);
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 .post_icon:hover{

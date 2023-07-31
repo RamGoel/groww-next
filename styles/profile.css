@@ -232,4 +232,5 @@
 
 .make_list{
     grid-template-columns: auto !important;
+    width: 100%;
 }

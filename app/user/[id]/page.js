@@ -35,7 +35,7 @@ const page = ({ params }) => {
         setLoading(false)
         toast.err(err.response.data.errors[0])
       })
-    }else{
+    } else {
       toast.success("Fetching profile from cache")
       dispatch(saveUserData(dataFromCache))
     }
@@ -54,7 +54,7 @@ const page = ({ params }) => {
         setLoading(false)
         toast.error(err?.response?.data?.errors[0])
       })
-    }else{
+    } else {
       // toast.success("Fetching images from cache")
       dispatch(saveUserImages(imageDataFromCache))
     }
@@ -111,14 +111,20 @@ const page = ({ params }) => {
                         <p>{userData.downloads}</p>
                       </div>
                     </div>
-                    <h4>Interests</h4>
-                    <div className='profile_tags'>
-                      {
-                        userData.tags['custom'].map((tag) => {
-                          return <p className='profile_tag_item'>{tag.title}</p>
-                        })
-                      }
-                    </div>
+
+                    {
+                      userData.tags.length && <>
+                        <h4>Interests</h4>
+                        <div className='profile_tags'>
+                          {
+                            userData.tags['custom'].map((tag) => {
+                              return <p className='profile_tag_item'>{tag.title}</p>
+                            })
+                          }
+                        </div>
+                      </>
+                    }
+
 
                     <div className='profile_action'>
                       <button disabled={isFollowed} style={{

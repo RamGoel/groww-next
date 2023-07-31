@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
-    uiMode: 'light',
+    uiMode: 'dark',
     feedData: [],
     userData: null,
     userImages: null,
