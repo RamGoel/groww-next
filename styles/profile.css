@@ -10,6 +10,9 @@
 
 .profile_header {
     width: 35%;
+    height: 90vh;
+    overflow: scroll;
+    padding: 20px 0px;
 }
 
 .profile_header_image {
@@ -29,6 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin: 10px 0px;
     width: 80%;
 }
@@ -157,7 +161,7 @@
     padding-bottom: 20px;
 }
 
-.profile_images::-webkit-scrollbar {
+.profile_images::-webkit-scrollbar, .profile_header::-webkit-scrollbar {
     display: none;
 }
 

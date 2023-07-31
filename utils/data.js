@@ -1,4 +1,4 @@
-import { ElementPlus, Heart, Logout, MessageText, Profile, Save2, Send2, Settings } from "iconsax-react";
+import { DocumentDownload, ElementPlus, Eye, Heart, Logout, MessageText, Profile, Save2, Send2, Settings } from "iconsax-react";
 import { styles } from "./styles";
 
 export const sidebarData=[
@@ -31,15 +31,15 @@ export const postFooterData=[
         key:"likes"
     },
     {
-        icon:(theme)=><MessageText color={styles[theme].text} size={18} />,
-        key:"comments"
+        icon:(theme)=><Eye color={styles[theme].text} size={18} />,
+        key:"views"
     },
     {
-        icon:(theme)=><Send2 color={styles[theme].text} size={18} />,
-        key:"shares"
+        icon:(theme)=><DocumentDownload color={styles[theme].text} size={18} />,
+        key:"downloads"
     },
-    {
-        icon:(theme)=><Save2 color={styles[theme].text} size={18} />,
-        key:"saves"
-    },
+    // {
+    //     icon:(theme)=><Save2 color={styles[theme].text} size={18} />,
+    //     key:"saves"
+    // },
 ]

@@ -8,34 +8,67 @@ import Loader from '@components/Loader'
 import NotFound from '@components/NotFound'
 import Image from 'next/image'
 import '@styles/profile.css'
-import { Grid5, HambergerMenu, Message, ProfileAdd } from 'iconsax-react'
+import { Check, Grid5, HambergerMenu, Message, ProfileAdd, ProfileTick } from 'iconsax-react'
 import PostCard from '@components/PostCard'
 import { Toaster, toast } from 'react-hot-toast'
+import { saveToCache, getCachedData } from '@services/cache'
 const page = ({ params }) => {
   const [isLoading, setLoading] = useState(false)
   const userData = useSelector(state => state.global.userData)
   const userImages = useSelector(state => state.global.userImages)
   const uiMode = useSelector(state => state.global.uiMode)
+  const [isFollowed, setFollowed] = useState(false)
   const [isGrid, setGrid] = useState(true)
   const dispatch = useDispatch()
-  useEffect(() => {
 
+
+  const fetchUserProfile = () => {
+    const dataFromCache = getCachedData('sociogram_profile')
+    if (!dataFromCache || dataFromCache.username !== params.id) {
+      toast.success("Fetching profile from server")
       setLoading(true)
       Api.get(`/users/${params.id}`).then(res => {
-        console.log(res)
         dispatch(saveUserData(res.data))
-        Api.get(`/users/${params.id}/photos`).then(imagesRes => {
-          setLoading(false)
-          console.log(imagesRes.data)
-          dispatch(saveUserImages(imagesRes.data))
-        })
+        saveToCache(res.data, 'sociogram_profile')
+        setFollowed(res.data.followed_by_user)
       }).catch(err => {
         setLoading(false)
-        toast.error(err.response.data.errors[0])
-        console.log(err)
+        toast.err(err.response.data.errors[0])
       })
-    
+    }else{
+      toast.success("Fetching profile from cache")
+      dispatch(saveUserData(dataFromCache))
+    }
+  }
+
+
+  const fetchUserImages = () => {
+    const imageDataFromCache = getCachedData('sociogram_images')
+    if (!imageDataFromCache || imageDataFromCache[0].user.username !== params.id) {
+      toast.success("Fetching images from server")
+      Api.get(`/users/${params.id}/photos`).then(imagesRes => {
+        setLoading(false)
+        dispatch(saveUserImages(imagesRes.data))
+        saveToCache(imagesRes.data, 'sociogram_images')
+      }).catch(err => {
+        setLoading(false)
+        toast.error(err?.response?.data?.errors[0])
+      })
+    }else{
+      toast.success("Fetching images from cache")
+      dispatch(saveUserImages(imageDataFromCache))
+    }
+  }
+  useEffect(() => {
+    fetchUserProfile()
+    fetchUserImages()
   }, [])
+
+
+  const followUser = () => {
+    toast.success(`Followed ${userData.name}`)
+    setFollowed(!isFollowed)
+  }
 
 
   return (
@@ -57,8 +90,9 @@ const page = ({ params }) => {
                     className='profile_header_image'
                   />
                   <div className='profile_header_text'>
-                    <h3>{userData.name} {userData.instagram_username ? `@${userData.instagram_username}`:''}</h3>
-                    <p>{userData?.bio?.substring(0,235)}</p>
+                    <h3>{userData.name}</h3>
+                    <h5>{userData.instagram_username ? `@${userData.instagram_username}` : ''}</h5>
+                    <p>{userData?.bio?.substring(0, 235)}</p>
                     <div className='profile_data'>
                       <div className='profile_data_item'>
                         <h4>{`Followers`}</h4>
@@ -87,7 +121,12 @@ const page = ({ params }) => {
                     </div>
 
                     <div className='profile_action'>
-                      <button><ProfileAdd />{userData.followed_by_user ? `Follow ${userData.first_name}` : `Unfollow ${userData.first_name}`}</button>
+                      <button disabled={isFollowed} style={{
+                        opacity: isFollowed ? 0.6 : 1
+                      }} onClick={() => followUser()}>
+                        {isFollowed ? <ProfileTick /> : <ProfileAdd />}
+                        {isFollowed ? `Followed ${userData.first_name}` : `Follow ${userData.first_name}`}
+                      </button>
                       <button><Message />Message</button>
                     </div>
                   </div>
@@ -102,7 +141,7 @@ const page = ({ params }) => {
                   <Grid5 className={`${isGrid ? 'selected-tab' : ''}`} onClick={() => setGrid(true)} />
                   <HambergerMenu className={`${!isGrid ? 'selected-tab' : ''}`} onClick={() => setGrid(false)} />
                 </div>
-                <div className={`profile_images ${!isGrid?'make_list':''}`}>
+                <div className={`profile_images ${!isGrid ? 'make_list' : ''}`}>
                   {
                     userImages.map((image, index) => {
                       return isGrid ? <Image
@@ -111,7 +150,7 @@ const page = ({ params }) => {
                         height={60}
                         alt={`posted_image${index}`}
                         className='profile_image_item'
-                      /> : <PostCard data={image}/>
+                      /> : <PostCard data={image} />
                     })
                   }
                 </div>

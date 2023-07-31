@@ -42,6 +42,23 @@
     margin-top: 3px;
 }
 
+.post_header_right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post_caption{
+    margin:10px auto;
+    width: 90%;
+}
+
+.post_caption p{
+    font-size: 12px;
+}
+
+
+
 
 
 .post_media{

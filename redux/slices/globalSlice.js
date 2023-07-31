@@ -26,6 +26,9 @@ const globalSlice = createSlice({
         },
         changeLoginStatus:(state)=>{
             state.isLoggedin=!state.isLoggedin
+        },
+        repeatFeedData:(state)=>{
+            state.feedData.push(state.feedData)
         }
     },
     extraReducers: {
@@ -43,7 +46,8 @@ export const {
     saveFeedData,
     saveUserData,
     saveUserImages,
-    changeLoginStatus
+    changeLoginStatus,
+    repeatFeedData
 } = globalSlice.actions
 
 export default globalSlice.reducer

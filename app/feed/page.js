@@ -10,6 +10,7 @@ import Loader from '@components/Loader'
 import { Api } from '@services/config'
 import { Toaster, toast } from 'react-hot-toast'
 import NotFound from '@components/NotFound'
+import { getCachedData, saveToCache } from '@services/cache'
 export default function Home() {
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(true)
@@ -18,29 +19,41 @@ export default function Home() {
   const scrollerRef = useRef()
 
   const fetchData = () => {
-    setLoading(true)
-    Api.get('/photos/random?count=10').then(res => {
-      dispatch(saveFeedData(res.data))
+    const dataFromCache = getCachedData('sociogram-feed')
+    if (!dataFromCache) {
+      toast.success("API call made to server for feed data")
+      setLoading(true)
+      Api.get('/photos/random?count=10').then(res => {
+        dispatch(saveFeedData(res.data))
+        saveToCache(res.data, "sociogram-feed")
+        setLoading(false)
+      }).catch(err => {
+        setLoading(false)
+        toast.error(err.message)
+      })
+    } else {
       setLoading(false)
-    }).catch(err => {
-      setLoading(false)
-      toast.error(err.message)
-    })
+      toast.success("Data fetched from cache")
+      dispatch(saveFeedData(dataFromCache))
+    }
+
   }
+
   const handleScroll = () => {
-    if (scrollerRef.current.scrollTop - scrollerRef.current.scrollHeight - scrollerRef.current.clientHeight < 1) {
+    if (Math.ceil(scrollerRef.current.scrollHeight - scrollerRef.current.scrollTop) === scrollerRef.current.clientHeight) {
       dispatch(saveFeedData(feedData))
-      alert("hello")
     }
   };
 
   useEffect(() => {
-    fetchData()
     scrollerRef.current.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
 
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <div className={`feed_page ${uiMode}`}>
