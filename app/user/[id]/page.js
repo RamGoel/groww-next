@@ -25,7 +25,7 @@ const page = ({ params }) => {
   const fetchUserProfile = () => {
     const dataFromCache = getCachedData('sociogram_profile')
     if (!dataFromCache || dataFromCache.username !== params.id) {
-      toast.success("Fetching profile from server")
+      // toast.success("Fetching profile from server")
       setLoading(true)
       Api.get(`/users/${params.id}`).then(res => {
         dispatch(saveUserData(res.data))
@@ -36,7 +36,7 @@ const page = ({ params }) => {
         toast.err(err.response.data.errors[0])
       })
     } else {
-      toast.success("Fetching profile from cache")
+      // toast.success("Fetching profile from cache")
       dispatch(saveUserData(dataFromCache))
     }
   }

@@ -108,5 +108,7 @@
     .post_body{
         width: 90vw;
     }
-
+    .post_icon{
+        border-radius: 200px !important;
+    }
 }

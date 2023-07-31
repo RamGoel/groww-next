@@ -18,6 +18,7 @@ export default function Home() {
   const [isLoading, setLoading] = useState(true)
   const uiMode = useSelector(state => state.global.uiMode)
   const feedData = useSelector(state => state.global.feedData)
+  const scrollerRef = useRef()
 
   const fetchData = () => {
     const dataFromCache = getCachedData('sociogram-feed')
@@ -41,25 +42,21 @@ export default function Home() {
   }
 
   const handleScroll = () => {
-    const scrollTop = document.getElementById('feed-mid').scrollTop
-    const scrollHeight = document.getElementById('feed-mid').scrollHeight
-    const clientHeight = document.getElementById('feed-mid').clientHeight
-
-    if (Math.ceil(scrollHeight - scrollTop) === clientHeight) {
+    if (Math.ceil(scrollerRef.current.scrollHeight - scrollerRef.current.scrollTop) === scrollerRef.current.clientHeight) {
       dispatch(saveFeedData(getCachedData('sociogram-feed')))
-      // toast.success('End Reached')
     }
   };
 
   useEffect(() => {
-    document.getElementById('feed-mid').addEventListener('scroll', handleScroll);
-    return () =>document.getElementById('feed-mid').removeEventListener('scroll', handleScroll);
-  }, [feedData]);
-
-
-  useEffect(()=>{
     fetchData()
-  },[])
+  }, []);
+
+  useEffect(() => {
+    scrollerRef.current.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrollerRef?.current?.scrollHeight]);
+
+
 
   return (
     <div className={`feed_page ${uiMode}`}>
@@ -78,7 +75,7 @@ export default function Home() {
       </div>
 
 
-      <div className='feed_box feed_mid' id='feed-mid'>
+      <div ref={scrollerRef} className='feed_box feed_mid'>
 
         {
 
