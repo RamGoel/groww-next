@@ -11,6 +11,8 @@ import { Api } from '@services/config'
 import { Toaster, toast } from 'react-hot-toast'
 import NotFound from '@components/NotFound'
 import { getCachedData, saveToCache } from '@services/cache'
+import { Link, Link2 } from 'iconsax-react'
+
 export default function Home() {
   const dispatch = useDispatch()
   const [isLoading, setLoading] = useState(true)
@@ -21,7 +23,7 @@ export default function Home() {
   const fetchData = () => {
     const dataFromCache = getCachedData('sociogram-feed')
     if (!dataFromCache) {
-      toast.success("API call made to server for feed data")
+      // toast.success("API call made to server for feed data")
       setLoading(true)
       Api.get('/photos/random?count=10').then(res => {
         dispatch(saveFeedData(res.data))
@@ -33,7 +35,7 @@ export default function Home() {
       })
     } else {
       setLoading(false)
-      toast.success("Data fetched from cache")
+      // toast.success("Data fetched from cache")
       dispatch(saveFeedData(dataFromCache))
     }
 
@@ -46,14 +48,12 @@ export default function Home() {
   };
 
   useEffect(() => {
+    fetchData()
     scrollerRef.current.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
 
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   return (
     <div className={`feed_page ${uiMode}`}>
@@ -70,8 +70,9 @@ export default function Home() {
           }
         </div>
       </div>
-      <div ref={scrollerRef} className='feed_box feed_mid'>
 
+
+      <div ref={scrollerRef} className='feed_box feed_mid'>
 
         {
 
@@ -85,6 +86,8 @@ export default function Home() {
 
         }
       </div>
+
+
       <div className='feed_box feed_right'>
         <div className='feed_right_box'>
           <Image
@@ -98,6 +101,17 @@ export default function Home() {
 
           <h3>Ram Goel</h3>
           <p>@ramgoel_</p>
+        </div>
+        <div className='feed_right_links_box'>
+
+          <a className='feed_right_link' href='https://linkedin.com/in/ramgoel'>
+            <Link2 size={15}/>
+            Linkedin
+          </a>
+          <a className='feed_right_link' href='https://github.com/RamGoel'>
+            <Link2 size={15}/>
+            Github
+          </a>
         </div>
       </div>
     </div>

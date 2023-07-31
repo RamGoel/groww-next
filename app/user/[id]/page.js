@@ -45,7 +45,7 @@ const page = ({ params }) => {
   const fetchUserImages = () => {
     const imageDataFromCache = getCachedData('sociogram_images')
     if (!imageDataFromCache || imageDataFromCache[0].user.username !== params.id) {
-      toast.success("Fetching images from server")
+      // toast.success("Fetching images from server")
       Api.get(`/users/${params.id}/photos`).then(imagesRes => {
         setLoading(false)
         dispatch(saveUserImages(imagesRes.data))
@@ -55,7 +55,7 @@ const page = ({ params }) => {
         toast.error(err?.response?.data?.errors[0])
       })
     }else{
-      toast.success("Fetching images from cache")
+      // toast.success("Fetching images from cache")
       dispatch(saveUserImages(imageDataFromCache))
     }
   }
