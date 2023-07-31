@@ -43,7 +43,7 @@ export default function Home() {
 
   const handleScroll = () => {
     if (Math.ceil(scrollerRef.current.scrollHeight - scrollerRef.current.scrollTop) === scrollerRef.current.clientHeight) {
-      dispatch(saveFeedData(feedData))
+      dispatch(saveFeedData(getCachedData('sociogram-feed')))
     }
   };
 
