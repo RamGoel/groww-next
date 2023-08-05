@@ -15,7 +15,7 @@ const AdminPage = () => {
 
     const getAllRequests = () => {
         setLoading(true)
-        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/all-invites`).then(response => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/all-invites?status=waiting`).then(response => {
             dispatch(saveData(response?.data.data))
             console?.log(response)
         }).catch(err => {
