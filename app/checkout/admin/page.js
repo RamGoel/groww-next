@@ -30,9 +30,11 @@ const AdminPage = () => {
         setLoading(true)
         const apiData = {
             inviteId: id,
-            status: isApproved ? 'approved' : 'forbidden',
-            reason: !isApproved ? reason : 'Happy Journey!',
-            boardingPassURL: 'google.com'
+            data:{
+                status: isApproved ? 'approved' : 'forbidden',
+                reason: !isApproved ? reason : 'Happy Journey!',
+                boardingPassURL: 'google.com'
+            }
         }
         axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/change-invite-status`, apiData).then(response => {
             toast.success(isApproved ? 'Approved Successfully' : 'Rejected Successfully')
