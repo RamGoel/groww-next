@@ -15,7 +15,7 @@ const AdminPage = () => {
 
     const getAllRequests = () => {
         setLoading(true)
-        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/all-invites?status=waiting`).then(response => {
+        axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/invite?status=waiting`).then(response => {
             dispatch(saveData(response?.data.data))
             console?.log(response)
         }).catch(err => {
@@ -36,7 +36,7 @@ const AdminPage = () => {
                 boardingPassURL: 'google.com'
             }
         }
-        axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/change-invite-status`, apiData).then(response => {
+        axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/invite`, apiData).then(response => {
             toast.success(isApproved ? 'Approved Successfully' : 'Rejected Successfully')
         }).catch(err => {
             console.log(err)
